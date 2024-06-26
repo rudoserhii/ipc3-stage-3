@@ -17,7 +17,7 @@ func (app *Config) routes() *gin.Engine {
 	v1 := mux.Group("/api").Group("/v1")
 
 	// Swagger docs
-	mux.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	v1.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// Products
 	products := v1.Group("/products")
