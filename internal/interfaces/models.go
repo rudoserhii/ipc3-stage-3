@@ -36,7 +36,7 @@ type ProductModel interface {
 
 type OrderModel interface {
 	GetAllOrders() ([]Order, error)
-	GetOrderByID(orderID uint) (Order, error)
+	GetOrderByID(orderID uint) (*Order, error)
 	CreateOrder(order *Order) error
 	CancelOrderByID(orderID uint) error
 }
