@@ -28,8 +28,6 @@ This API is documented [here](https://ips3.obi.ninja/api/v1/docs/index.html) via
 
 The API can be accessed via HTTP requests. It exposes endpoints for various CRUD operations.
 
-Sample API base URL: `http://example.com/api`
-
 **Current [Active]** base URL: `https://ips3.obi.ninja/api/v1`
 
 ## 3. Setting Up and Running the API (Locally and otherwise)
