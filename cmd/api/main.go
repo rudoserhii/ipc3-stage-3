@@ -15,6 +15,11 @@ type Config struct {
 	Handlers interfaces.Handlers
 }
 
+// @title			Mini Shop API
+// @version		1.0
+// @description	This is a small web store web API app.
+// @host			https://ips3.obi.ninja
+// @BasePath		/api/v1/
 func main() {
 	// Init DB.
 	db := db.InitDB()

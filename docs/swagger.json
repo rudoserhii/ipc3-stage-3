@@ -1,0 +1,58 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a small web store web API app.",
+        "title": "Mini Shop API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8081",
+    "basePath": "/api/v1/",
+    "paths": {
+        "/products": {
+            "get": {
+                "description": "Get all products in store",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get all products in store",
+                "operationId": "get-all-products",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/products/{product_id}": {
+            "get": {
+                "description": "Get all product in store by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get all product in store by ID",
+                "operationId": "get-product-by-id",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Product ID",
+                        "name": "product_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}

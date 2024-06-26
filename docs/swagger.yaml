@@ -1,0 +1,39 @@
+basePath: /api/v1/
+host: localhost:8081
+info:
+  contact: {}
+  description: This is a small web store web API app.
+  title: Mini Shop API
+  version: "1.0"
+paths:
+  /products:
+    get:
+      description: Get all products in store
+      operationId: get-all-products
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Get all products in store
+      tags:
+      - Products
+  /products/{product_id}:
+    get:
+      description: Get all product in store by ID
+      operationId: get-product-by-id
+      parameters:
+      - description: Product ID
+        in: path
+        name: product_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Get all product in store by ID
+      tags:
+      - Products
+swagger: "2.0"
