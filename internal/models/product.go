@@ -14,21 +14,21 @@ func (p *ProductModel) GetAllProducts() ([]interfaces.Product, error) {
 
 func (p *ProductModel) GetProductByID(productID uint) (*interfaces.Product, error) {
 	var product interfaces.Product
-	if err := DB.First(&interfaces.Product{}, product).Error; err != nil {
+	if err := DB.First(&product, productID).Error; err != nil {
 		return nil, err
 	}
 	return &product, nil
 }
 
-func (p *ProductModel) CreateProduct(product interfaces.Product) error {
+func (p *ProductModel) CreateProduct(product *interfaces.Product) error {
 	if err := DB.Create(&product).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
-func (p *ProductModel) UpdateProductByID(product interfaces.Product) error {
-	if err := DB.Save(&product).Error; err != nil {
+func (p *ProductModel) UpdateProductByID(product *interfaces.Product, productID uint) error {
+	if err := DB.Model(&interfaces.Product{}).Where("id = ?", productID).Updates(&product).Error; err != nil {
 		return err
 	}
 	return nil
