@@ -18,7 +18,7 @@ type Config struct {
 // @title			Mini Shop API
 // @version			1.0
 // @description		This is a small Webstore API app.
-// @host			https://ips3.obi.ninja
+// @host			ips3.obi.ninja
 // @BasePath		/api/v1/
 func main() {
 	// Init DB.

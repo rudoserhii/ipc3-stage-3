@@ -1,5 +1,5 @@
 basePath: /api/v1/
-host: https://ips3.obi.ninja
+host: ips3.obi.ninja
 info:
   contact: {}
   description: This is a small Webstore API app.
