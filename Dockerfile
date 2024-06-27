@@ -10,6 +10,7 @@ RUN chmod +x ./app
 
 # build a tiny docker image
 FROM frolvlad/alpine-glibc
-RUN mkdir /app
+# make directory for product images
+RUN mkdir -p /app /images/products
 COPY --from=builder /app/app /app
 CMD [ "/app/app" ]
