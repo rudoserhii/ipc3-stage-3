@@ -22,7 +22,7 @@ This project is a simple REST compliant shop API written in Go.
 
 ## 2. API Documentation
 
-This API is documented [here](https://ips3.obi.ninja/api/v1/docs/index.html) via Swagger Docs.
+This API is documented [here](https://documenter.getpostman.com/view/29936566/2sA3dsmDqg) on Postman, and [here](https://ips3.obi.ninja/api/v1/docs/index.html) via Swagger Docs.
 
 ### 2.1 How to Call the API
 
