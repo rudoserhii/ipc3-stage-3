@@ -246,28 +246,28 @@ func (p *ProductRoutes) UpdateProductByID(c *gin.Context) {
 			return
 		}
 
-		priceStr := form.Value["price"]
-		name := form.Value["name"]
-		description := form.Value["description"]
+		priceStr := c.PostForm("price")
+		name := c.PostForm("name")
+		description := c.PostForm("description")
+		availableStr := c.PostForm("available")
 		image := form.File["image"]
-		availableStr := form.Value["available"]
 
-		if name[0] != "" {
-			product.Name = name[0]
+		if name != "" {
+			product.Name = name
 		}
 
-		if description[0] != "" {
-			product.Description = description[0]
+		if description != "" {
+			product.Description = description
 		}
 
-		if image[0] != nil {
+		if image != nil {
 			c.SaveUploadedFile(image[0], fmt.Sprintf("%s/%s", uploadDir, image[0].Filename))
 			product.Image = imgRoute + image[0].Filename
 		}
 
 		var price float64
-		if priceStr[0] != "" {
-			price, err = strconv.ParseFloat(priceStr[0], 64)
+		if priceStr != "" {
+			price, err = strconv.ParseFloat(priceStr, 64)
 			if err != nil {
 				c.JSON(http.StatusBadRequest, gin.H{
 					"status":  "error",
@@ -279,8 +279,8 @@ func (p *ProductRoutes) UpdateProductByID(c *gin.Context) {
 		}
 
 		var available bool
-		if availableStr[0] != "" {
-			available, err = strconv.ParseBool(availableStr[0])
+		if availableStr != "" {
+			available, err = strconv.ParseBool(availableStr)
 			if err != nil {
 				c.JSON(http.StatusBadRequest, gin.H{
 					"status":  "error",
