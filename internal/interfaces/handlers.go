@@ -10,6 +10,7 @@ type Handlers interface {
 type ProductRoutes interface {
 	GetAllProducts(c *gin.Context)
 	GetProductByID(c *gin.Context)
+	GetProductImage(c *gin.Context)
 	CreateProduct(c *gin.Context)
 	UpdateProductByID(c *gin.Context)
 	DeleteProductByID(c *gin.Context)

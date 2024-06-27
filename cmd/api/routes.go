@@ -27,6 +27,9 @@ func (app *Config) routes() *gin.Engine {
 	products.PUT("/:productID", app.Handlers.Product().UpdateProductByID)
 	products.DELETE("/:productID", app.Handlers.Product().DeleteProductByID)
 
+	// Product Images
+	products.GET("/images/:imageName", app.Handlers.Product().GetProductImage)
+
 	// Orders
 	orders := v1.Group("/orders")
 	orders.GET("/", app.Handlers.Order().GetAllOrders)
