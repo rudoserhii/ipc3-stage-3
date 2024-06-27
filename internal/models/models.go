@@ -14,13 +14,16 @@ type Models struct {
 
 func NewModels(db *gorm.DB) interfaces.Models {
 	DB = db
-	return &Models{}
+	return &Models{
+		product: &ProductModel{},
+		order:   &OrderModel{},
+	}
 }
 
-func (p *Models) Product() interfaces.ProductModel {
-	return p.product
+func (m *Models) Product() interfaces.ProductModel {
+	return m.product
 }
 
-func (o *Models) Order() interfaces.OrderModel {
-	return o.order
+func (m *Models) Order() interfaces.OrderModel {
+	return m.order
 }
