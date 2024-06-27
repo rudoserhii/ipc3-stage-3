@@ -29,8 +29,8 @@ type Order struct {
 type ProductModel interface {
 	GetProductByID(productID uint) (*Product, error)
 	GetAllProducts() ([]Product, error)
-	CreateProduct(p Product) error
-	UpdateProductByID(p Product) error
+	CreateProduct(p *Product) error
+	UpdateProductByID(p *Product, productID uint) error
 	DeleteProductByID(productID uint) error
 }
 
