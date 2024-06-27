@@ -2,10 +2,72 @@ basePath: /api/v1/
 host: localhost:8081
 info:
   contact: {}
-  description: This is a small web store web API app.
+  description: This is a small Webstore API app.
   title: Mini Shop API
   version: "1.0"
 paths:
+  /orders:
+    get:
+      description: Get all orders in store
+      operationId: get-all-orders
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+      summary: Get all orders in store
+      tags:
+      - Orders
+    post:
+      description: Create a new order
+      operationId: create-order
+      parameters:
+      - description: Product ID
+        in: formData
+        name: productID
+        required: true
+        type: integer
+      - description: Product Quantity to place order for
+        in: formData
+        name: quantity
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Create a new order
+      tags:
+      - Orders
+  /orders/{orderID}:
+    delete:
+      description: Cancel an order
+      operationId: cancel-order
+      parameters:
+      - description: Order ID
+        in: formData
+        name: orderID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Cancel an order
+      tags:
+      - Orders
   /products:
     get:
       description: Get all products in store
@@ -15,13 +77,78 @@ paths:
       responses:
         "200":
           description: OK
+        "500":
+          description: Internal Server Error
       summary: Get all products in store
       tags:
       - Products
-  /products/{product_id}:
+    post:
+      description: Create a new product
+      operationId: create-product
+      parameters:
+      - description: Product Name
+        in: formData
+        name: name
+        required: true
+        type: string
+      - description: Product Description
+        in: formData
+        name: description
+        required: true
+        type: string
+      - description: Product Price
+        in: formData
+        name: price
+        required: true
+        type: string
+      - description: Product Image
+        in: formData
+        name: image
+        required: true
+        type: file
+      - description: Product Availability, true or false
+        in: formData
+        name: available
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Create a new product
+      tags:
+      - Products
+  /products/{orderID}:
     get:
-      description: Get all product in store by ID
-      operationId: get-product-by-id
+      description: Retrieve an order by ID
+      operationId: get-order-by-id
+      parameters:
+      - description: Order ID
+        in: path
+        name: orderID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Retrieve an order by ID
+      tags:
+      - Orders
+  /products/{product_id}:
+    delete:
+      description: Delete a product in store by ID
+      operationId: delete-product-by-id
       parameters:
       - description: Product ID
         in: path
@@ -31,9 +158,96 @@ paths:
       produces:
       - application/json
       responses:
+        "202":
+          description: Accepted
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Delete a product in store by ID
+      tags:
+      - Products
+  /products/{productID}:
+    get:
+      description: Get a product in store by ID
+      operationId: get-product-by-id
+      parameters:
+      - description: Product ID
+        in: path
+        name: productID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
         "200":
           description: OK
-      summary: Get all product in store by ID
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Get a product in store by ID
+      tags:
+      - Products
+    put:
+      description: Update an existing product by ID
+      operationId: update-product
+      parameters:
+      - description: Product ID
+        in: path
+        name: productID
+        required: true
+        type: string
+      - description: Product Name
+        in: formData
+        name: name
+        type: string
+      - description: Product Description
+        in: formData
+        name: description
+        type: string
+      - description: Product Price
+        in: formData
+        name: price
+        type: string
+      - description: Product Image
+        in: formData
+        name: image
+        type: file
+      - description: Product Availability, true or false
+        in: formData
+        name: available
+        type: string
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Update an existing product by ID
+      tags:
+      - Products
+  /products/images/{imageName}:
+    get:
+      description: Get a product image
+      operationId: get-product-image
+      parameters:
+      - description: Image Filename
+        in: path
+        name: imageName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+      summary: Get a product image
       tags:
       - Products
 swagger: "2.0"
