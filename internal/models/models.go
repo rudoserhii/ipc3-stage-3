@@ -5,8 +5,6 @@ import (
 	"gorm.io/gorm"
 )
 
-var DB *gorm.DB
-
 type Models struct {
 	product interfaces.ProductModel
 	order   interfaces.OrderModel
@@ -21,9 +19,8 @@ func (m *Models) Order() interfaces.OrderModel {
 }
 
 func NewModels(db *gorm.DB) interfaces.Models {
-	DB = db
 	return &Models{
-		product: &ProductModel{},
-		order:   &OrderModel{},
+		product: &ProductModel{DB: db},
+		order:   &OrderModel{DB: db},
 	}
 }
