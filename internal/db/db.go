@@ -10,8 +10,6 @@ import (
 	"gorm.io/gorm"
 )
 
-var DB *gorm.DB
-
 func InitDB() *gorm.DB {
 	// new db
 	db, err := gorm.Open(sqlite.Open("data.db"), &gorm.Config{})
@@ -23,15 +21,13 @@ func InitDB() *gorm.DB {
 		db.Logger.LogMode(0)
 	}
 
-	DB = db
-
-	rawDB := RawDB()
+	rawDB := RawDB(db)
 
 	rawDB.SetMaxIdleConns(20)
 	rawDB.SetMaxOpenConns(100)
 
 	// migrate models
-	err = migrate()
+	err = Migrate(db)
 	if err != nil {
 		log.Panicf("Unable to migrate models %s\n", err.Error())
 	}
@@ -40,8 +36,11 @@ func InitDB() *gorm.DB {
 	return db
 }
 
-func migrate() error {
-	err := DB.AutoMigrate(&interfaces.Product{}, &interfaces.Order{})
+func Migrate(db *gorm.DB) error {
+	err := db.AutoMigrate(
+		&interfaces.Product{},
+		&interfaces.Order{},
+	)
 	if err != nil {
 		return err
 	}
@@ -49,8 +48,8 @@ func migrate() error {
 	return nil
 }
 
-func RawDB() *sql.DB {
-	rawDB, err := DB.DB()
+func RawDB(db *gorm.DB) *sql.DB {
+	rawDB, err := db.DB()
 	if err != nil {
 		log.Panicf("Unable to get raw sql.DB %s\n", err.Error())
 	}
