@@ -6,21 +6,21 @@ import (
 )
 
 type Models struct {
-	product interfaces.ProductModel
-	order   interfaces.OrderModel
+	productModel interfaces.ProductModel
+	orderModel   interfaces.OrderModel
 }
 
 func (m *Models) Product() interfaces.ProductModel {
-	return m.product
+	return m.productModel
 }
 
 func (m *Models) Order() interfaces.OrderModel {
-	return m.order
+	return m.orderModel
 }
 
 func NewModels(db *gorm.DB) interfaces.Models {
 	return &Models{
-		product: &ProductModel{DB: db},
-		order:   &OrderModel{DB: db},
+		productModel: &ProductModel{DB: db},
+		orderModel:   &OrderModel{DB: db},
 	}
 }
