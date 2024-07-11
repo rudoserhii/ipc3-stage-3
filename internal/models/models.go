@@ -8,16 +8,8 @@ import (
 var DB *gorm.DB
 
 type Models struct {
-	product *ProductModel
-	order   *OrderModel
-}
-
-func NewModels(db *gorm.DB) interfaces.Models {
-	DB = db
-	return &Models{
-		product: &ProductModel{},
-		order:   &OrderModel{},
-	}
+	product interfaces.ProductModel
+	order   interfaces.OrderModel
 }
 
 func (m *Models) Product() interfaces.ProductModel {
@@ -26,4 +18,12 @@ func (m *Models) Product() interfaces.ProductModel {
 
 func (m *Models) Order() interfaces.OrderModel {
 	return m.order
+}
+
+func NewModels(db *gorm.DB) interfaces.Models {
+	DB = db
+	return &Models{
+		product: &ProductModel{},
+		order:   &OrderModel{},
+	}
 }
